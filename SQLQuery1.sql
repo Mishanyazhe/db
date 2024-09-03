@@ -1,0 +1,1 @@
+﻿--INSERT INTO [STUDENTS] (FirstName, LastName) VALUES ('AAA', 'SSS')
