@@ -1,0 +1,16 @@
+﻿SET IDENTITY_INSERT [dbo].[Students] ON
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (1, N'', N'test', N'', N'2002-08-01', N'', N'', N'')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (2, N'Михаил', N'Старшов', N'Ильич', N'2002-08-01', N'Малые Меми', N'89655993900', N'@discosushi')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (3, N'Фирзяр', N'Галявиев', N'Раилевич', N'2002-11-01', N'Арск', N'89631202622', N'@yaferzik')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (6, N'', N'test', N'', N'2002-01-22', N'', N'', N'')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (7, N'Михаил', N'Старшов', N'Ильич', N'2002-01-08', N'Малые Меми', N'89655993900', N'@discosushi')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (8, N'Дарья', N'Иванова', N'Вадимовна', N'2002-04-10', N'Йошкар-Ола', N'89996094881', N'@@darya_best')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (9, N'Дарья', N'Иванова', N'Вадимовна', N'2002-04-10', N'Йошкар-Ола', N'89996094881', N'@darya_best')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (10, N'Карина', N'Хабибуллина', N'Ленаровна', N'2001-11-01', N'Альметьевск', N'89872882025', N'@ren_helnwein')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (11, N'Тимур', N'Грузков', N'Дмитриевич', N'2001-06-22', N'Зеленодольск', N'89872788468', N'@timkagru')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (12, N'Даниил', N'Семёнов', N'', N'2001-11-03', N'Оренбург', N'89370412082', N'@swissmer')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (13, N'Снежана', N'Алексеева', N'', N'2001-01-01', N'Чебоксары', N'', N'@snezhanaaaleek')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (14, N'Александр', N'Казаков', N'Вадимович', N'2002-04-12', N'Ульяновск', N'89278238890', N'@Red_naxel')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (15, N'Раниль', N'Хузин', N'Рушанович', N'2001-12-20', N'Старые Чечкабы', N'89083496202', N'@SequeYa')
+INSERT INTO [dbo].[Students] ([Id], [FirstName], [LastName], [Patronymic], [BirthDay], [PlaceOfBirth], [PhoneNumber], [TgUsername]) VALUES (16, N'Адель', N'Махмутов', N'Наилевич', N'2002-09-11', N'Казань', N'89376184373', N'@Vodypep')
+SET IDENTITY_INSERT [dbo].[Students] OFF
