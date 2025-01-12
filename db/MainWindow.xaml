@@ -35,12 +35,10 @@
                                       VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <!-- Эффект при наведении мыши -->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#FF8F8A86"/>
                             </Trigger>
 
-                            <!-- Эффект нажатия -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#FF726D69"/>
                                 <Setter TargetName="border" Property="RenderTransform">
@@ -50,7 +48,6 @@
                                 </Setter>
                             </Trigger>
 
-                            <!-- Возвращаем исходное состояние при отпускании -->
                             <Trigger Property="IsPressed" Value="False">
                                 <Setter TargetName="border" Property="RenderTransform">
                                     <Setter.Value>
@@ -64,7 +61,6 @@
             </Setter>
         </Style>
 
-
         <Style TargetType="TextBox">
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="13"/>
@@ -72,7 +68,6 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="#FF8F8481"/>
 
-            <!-- Используем шаблон для изменения формы TextBox -->
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -83,6 +78,37 @@
                             Padding="{TemplateBinding Padding}">
                             <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
                         </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="3,3,0,0"
+                                Padding="5"
+                                Margin="2,2,0,0">
+                            <ContentPresenter x:Name="content"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              ContentSource="Header"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF8F8481"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF8F8481"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFB5B5B5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -141,7 +167,7 @@
                     </Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Удалить" FontFamily="Book Antiqua" FontSize="13">
+            <!--<TabItem Header="Удалить" FontFamily="Book Antiqua" FontSize="13">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF8F8481" Offset="0.789"/>
@@ -176,8 +202,8 @@
                     </Button>
 
                 </Grid>
-            </TabItem>
-            <TabItem Header="Просмотр" Height="22" FontFamily="Book Antiqua" FontSize="13">
+            </TabItem>-->
+            <TabItem Header="Просмотр"  FontFamily="Book Antiqua" FontSize="13">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF8F8481" Offset="0.789"/>
@@ -250,7 +276,7 @@
                     </Button>
 
                     <Popup Name="editDatePopup" StaysOpen="False" IsOpen="False" Placement="Center" Grid.ColumnSpan="2">
-                        <StackPanel Background="#FFF9DFDD" Height="100" Width="150">
+                        <StackPanel Background="#FFE5E5E5" Height="100" Width="150">
                             <TextBlock Text="Выберите новую дату"/>
                             <DatePicker x:Name="newPassageDatePicker"/>
                             <Button Content="Обновить дату" Click="UpdateDate_Click" Foreground="Black" FontSize="13">

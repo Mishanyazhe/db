@@ -106,11 +106,13 @@ namespace db
             try
             {
                 date = DateTime.Parse(dateText.Replace(" ", string.Empty));
+
                 return date;
             }
             catch (Exception)
             {
                 PopupWindow("Некорректно введена дата!", 2);
+
                 return DateTime.MinValue;
             }
         }
@@ -124,17 +126,30 @@ namespace db
                     textBox.Clear();
                 }
             }
+
             lastNameTextBox.Focus();
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             var currentTextBox = sender as TextBox;
+
             if (currentTextBox == null) return;
 
             int index = Array.IndexOf(textBoxes, currentTextBox);
+
             if (index < 0) return;
 
+            SwitchingToBoxing(e, currentTextBox, index);
+
+            if (currentTextBox.Name == "birthDayTextBox" || currentTextBox.Name == "passageDayTextBox")
+            {
+                HandleDateTextBoxKeyDown(e, currentTextBox);
+            }
+        }
+
+        private void SwitchingToBoxing(KeyEventArgs e, TextBox currentTextBox, int index)
+        {
             if (e.Key == Key.Right && Keyboard.Modifiers == ModifierKeys.Shift && index < textBoxes.Length - 1)
             {
                 textBoxes[index + 1].Focus();
@@ -157,6 +172,32 @@ namespace db
             {
                 index = textBoxes.Length - 1;
                 textBoxes[index].Focus();
+            }            
+        }
+
+        private void HandleDateTextBoxKeyDown(KeyEventArgs e, TextBox currentTextBox)
+        {
+            if (!((e.Key >= Key.D0 && e.Key <= Key.D9) ||
+          (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) ||
+          e.Key == Key.Back ||
+          e.Key == Key.Left || e.Key == Key.Right))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (currentTextBox.Text.Length == 2 || currentTextBox.Text.Length == 5)
+            {
+                int caretPosition = currentTextBox.CaretIndex;
+
+                currentTextBox.Text += '.';
+                currentTextBox.CaretIndex = caretPosition + 1;
+            }
+
+            if (currentTextBox.Text.Length >= 10 &&
+                e.Key != Key.Back && e.Key != Key.Left && e.Key != Key.Right)
+            {
+                e.Handled = true;
             }
         }
 
@@ -202,6 +243,7 @@ namespace db
         {
             SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM Fluorography", sqlConnection);
             int total = (int)command.ExecuteScalar();
+
             totalCount.Content = $"Всего: {total}";
         }
 
@@ -209,6 +251,7 @@ namespace db
         {
             SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM Fluorography WHERE DATEDIFF(DAY, PassageDay, GETDATE()) > 365", sqlConnection);
             int overdue = (int)command.ExecuteScalar();
+
             overdueCount.Content = $"Просроченные: {overdue}";
         }
 
@@ -216,6 +259,7 @@ namespace db
         {
             SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM Fluorography WHERE DATEDIFF(DAY, PassageDay, GETDATE()) > 335 AND  DATEDIFF(DAY, PassageDay, GETDATE()) < 365", sqlConnection);
             int expiring = (int)command.ExecuteScalar();
+
             expiringCount.Content = $"Истекающие: {expiring}";
         }
 
@@ -233,11 +277,11 @@ namespace db
 
                     if ((DateTime.Now - passageDay).TotalDays > 365)
                     {
-                        e.Row.Background = new SolidColorBrush(Colors.LightGray);
+                        e.Row.Background = new SolidColorBrush(Colors.Gray);
                     }
                     else if ((DateTime.Now - passageDay).TotalDays > 335)
                     {
-                        e.Row.Background = new SolidColorBrush(Colors.Gray);
+                        e.Row.Background = new SolidColorBrush(Colors.LightGray);
                     }
                 }
                 catch (FormatException)
