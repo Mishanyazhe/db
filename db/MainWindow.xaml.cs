@@ -316,41 +316,58 @@ namespace db
 
             if (selectedRow != null) dataGridContextMenu.IsOpen = true;
         }
-
-        private void EditDate_Click(object sender, RoutedEventArgs e)
+        private void EditData_Click(object sender, RoutedEventArgs e)
         {
             if (selectedRow != null)
             {
-                editDatePopup.IsOpen = true;
+                editDataPopup.IsOpen = true;
 
-                newPassageDatePicker.SelectedDate = DateTime.Parse(selectedRow["Дата прохождения"].ToString());
+                newLastNameT.Text = selectedRow["Фамилия"].ToString();
+                newFirstNameT.Text = selectedRow["Имя"].ToString();
+                newPatronymicT.Text = selectedRow["Отчество"].ToString();
+                newPassageDatePickerT.SelectedDate = DateTime.Parse(selectedRow["Дата прохождения"].ToString());
+                newBirthdayDatePicker.SelectedDate = DateTime.Parse(selectedRow["Дата рождения"].ToString());
+                newPlaceOfWork.Text = selectedRow["Место работы"].ToString();
+                newPlaceOfResidence.Text = selectedRow["Место проживания"].ToString();
             }
         }
-
-        private void UpdateDate_Click(object sender, RoutedEventArgs e)
+        private void UpdateData_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedRow != null && newPassageDatePicker.SelectedDate.HasValue)
+            if (selectedRow != null)
             {
-                DateTime newDate = newPassageDatePicker.SelectedDate.Value;
+                string _newLastName = newLastNameT.Text;
+                string _newFirstName = newFirstNameT.Text;
+                string _newPatronymic = newPatronymicT.Text;
+                DateTime newBDDate = newBirthdayDatePicker.SelectedDate.Value;
+                DateTime newPDDate = newPassageDatePickerT.SelectedDate.Value;
+                string _newPlaceOfWork = newPlaceOfWork.Text;
+                string _newPlaceOfResidence = newPlaceOfResidence.Text;
 
                 SqlCommand command = new SqlCommand(
-                    "UPDATE Fluorography SET PassageDay = @newDate WHERE Id = @id", sqlConnection);
+                    "UPDATE Fluorography SET LastName = @newLastName, FirstName = @newFirstName, Patronymic = @newPatronymic," +
+                    "PassageDay = @newPDDate, BirthDay = @newBDDate, PlaceOfWork = @newPlaceOfWork, PlaceOfResidence = @newPlaceOfResidence WHERE Id = @id", sqlConnection);
 
-                command.Parameters.AddWithValue("@newDate", newDate);
+                command.Parameters.AddWithValue("@newLastName", _newLastName);
+                command.Parameters.AddWithValue("@newFirstName", _newFirstName);
+                command.Parameters.AddWithValue("@newPatronymic", _newPatronymic);
+                command.Parameters.AddWithValue("@newBDDate", newBDDate);
+                command.Parameters.AddWithValue("@newPDDate", newPDDate);
+                command.Parameters.AddWithValue("@newPlaceOfWork", _newPlaceOfWork);
+                command.Parameters.AddWithValue("@newPlaceOfResidence", _newPlaceOfResidence);
                 command.Parameters.AddWithValue("@id", selectedRow["Id"]);
 
                 command.ExecuteNonQuery();
 
-                editDatePopup.IsOpen = false;
+                editDataPopup.IsOpen = false;
 
                 Grid_Loaded_1(null, null);
-                PopupWindow("Дата успешно обновлена", 1.5);
+                PopupWindow("Данные успешно обновлены", 1.5);
             }
         }
 
         private void CancelEdit_Click(object sender, RoutedEventArgs e)
         {
-            editDatePopup.IsOpen = false;
+            editDataPopup.IsOpen = false;
         }
 
         private void DeleteRow_Click(object sender, RoutedEventArgs e)
